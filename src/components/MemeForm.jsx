@@ -9,7 +9,7 @@ export default function MemeForm({ onNew }) {
   const [title, setTitle] = useState('');
   const [imageUrl, setImageUrl] = useState('');
   const [tags, setTags] = useState('');
-
+console.log("Image URL:", imageUrl);
   async function submit(e) {
     e.preventDefault();
     try {
@@ -50,6 +50,7 @@ export default function MemeForm({ onNew }) {
           pattern="https?://.+"
           title="Please enter a valid image URL starting with http:// or https://"
         />
+     
         <input
           value={tags}
           onChange={(e) => setTags(e.target.value)}

@@ -57,6 +57,8 @@ export default function MemeCard({ meme }) {
   return (
     <div className="meme-card">
   <img src={meme.imageUrl} alt={meme.title} className="meme-image" />
+  
+
   <div className="meme-content">
     <h2 className="meme-title">{meme.title}</h2>
     <p className="meme-tags">
