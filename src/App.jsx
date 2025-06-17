@@ -1,38 +1,68 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import MemeList from './pages/MemeList';
+import MemeForm from './pages/MemeForm';
+import BiddingPage from './pages/BiddingPage';
+import VotingPage from './pages/VotingPage';
+import CaptionPage from './pages/CaptionPage';
 import { socket } from './utils/socket';
-import axios from 'axios';
-import MemeForm from './components/MemeForm';
-import MemeCard from './components/MemeCard';
-import "./pages/MainLayout.css"
+import API from './utils/api'; // ✅ Updated import
+
 function App() {
   const [memes, setMemes] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:3001/memes')
-      .then(r => setMemes(r.data));
+    // ✅ Fetch memes using .env baseURL
+    API.get('/memes')
+      .then((r) => setMemes(r.data))
+      .catch((err) => console.error("❌ Failed to load memes:", err));
 
-    socket.on('new-meme', (m) => setMemes(prev => [m, ...prev]));
-    socket.on('newBid', bid => { /* handle bid update */ });
-    socket.on('new-vote', vote => { /* handle vote update */ });
-    socket.on('new-caption', cap => { /* handle caption/vibe update */ });
+    // ✅ Socket listeners
+    socket.on('new-meme', (m) => setMemes((prev) => [m, ...prev]));
+    socket.on('newBid', (bid) => {
+      setMemes((prev) =>
+        prev.map((meme) =>
+          meme._id === bid.memeId ? { ...meme, currentBid: bid.amount } : meme
+        )
+      );
+    });
 
-    return () => socket.off();
+    socket.on('new-vote', (vote) => {
+      setMemes((prev) =>
+        prev.map((meme) =>
+          meme._id === vote.memeId ? { ...meme, votes: vote.votes } : meme
+        )
+      );
+    });
+
+    socket.on('new-caption', (cap) => {
+      setMemes((prev) =>
+        prev.map((meme) =>
+          meme._id === cap.memeId ? { ...meme, caption: cap.caption } : meme
+        )
+      );
+    });
+
+    return () => {
+      socket.off();
+    };
   }, []);
 
   return (
-    
-<div className="main-wrapper">
-  <h1 className="main-title" id='#Top'>⚡ MemeHustle</h1>
-  <MemeForm onNew={m => setMemes(ps => [m, ...ps])} />
-  <div className="meme-grid">
-    {memes.map(m => <MemeCard key={m._id} meme={m} />)}
-  </div>
-
-<div className='top'><a href="#Top">^</a></div>
-
-</div>
-
+    <>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<MemeList memes={memes} />} />
+        <Route path="/submit" element={<MemeForm onNew={(m) => setMemes((prev) => [m, ...prev])} />} />
+        <Route path="/bid/:id" element={<BiddingPage />} />
+        <Route path="/vote/:id" element={<VotingPage />} />
+        <Route path="/caption/:id" element={<CaptionPage />} />
+      </Routes>
+    </>
   );
 }
 
 export default App;
+
+// Aditya Mohite
