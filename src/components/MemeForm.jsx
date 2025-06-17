@@ -8,7 +8,7 @@ import { faImage, faCloudUploadAlt } from '@fortawesome/free-solid-svg-icons';
 // Define BASE_URL with a fallback
 const BASE_URL = process.env.REACT_APP_API_URL || 'https://memehustle-backend-8kap.onrender.com';
 
-console.log('MemeForm API base URL:', BASE_URL); // Debug log
+
 
 export default function MemeForm({ onNew }) {
   const [title, setTitle] = useState('');
@@ -19,7 +19,7 @@ export default function MemeForm({ onNew }) {
 async function submit(e) {
   e.preventDefault();
   setError(null);
-  console.log('Submitting to:', `${BASE_URL}/memes`);
+  
   try {
     const res = await axios.post(`${BASE_URL}/memes`, {
       title,
@@ -31,7 +31,7 @@ async function submit(e) {
       },
     });
 
-    console.log('Meme submission successful:', res.data);
+  
 
     setTitle('');
     setImageUrl('');
@@ -41,7 +41,7 @@ async function submit(e) {
     // if (onNew) onNew(res.data);
 
   } catch (err) {
-    console.error('Submission failed:', err.message);
+   
     setError('Failed to submit meme. Please try again.');
   }
 }

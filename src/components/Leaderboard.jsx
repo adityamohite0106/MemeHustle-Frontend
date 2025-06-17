@@ -5,7 +5,7 @@ import axios from 'axios';
 // Define BASE_URL with a fallback
 const BASE_URL = process.env.REACT_APP_API_URL || 'https://memehustle-backend-8kap.onrender.com';
 
-console.log('Leaderboard API base URL:', BASE_URL);
+// console.log('Leaderboard API base URL:', BASE_URL);
 
 export default function Leaderboard() {
   const [memes, setMemes] = useState([]);
@@ -18,7 +18,7 @@ export default function Leaderboard() {
         const sortedMemes = res.data.sort((a, b) => (b.voteCount || 0) - (a.voteCount || 0));
         setMemes(sortedMemes);
       } catch (error) {
-        console.error('Error fetching memes for leaderboard:', error.message);
+        // console.error('Error fetching memes for leaderboard:', error.message);
         setError('Failed to load leaderboard. Please try again.');
       }
     };

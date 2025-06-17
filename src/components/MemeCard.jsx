@@ -32,13 +32,13 @@ export default function MemeCard({ meme }) {
         voteType: type,
         user: 'anon'
       });
-      console.log("Vote response:", res.data);
+    
 
       if (res.data.updatedVoteCount !== undefined) {
         setVoteCount(res.data.updatedVoteCount);
       }
     } catch (err) {
-      console.error("Vote failed:", err);
+      // console.error("Vote failed:", err);
     }
   };
 
@@ -49,10 +49,10 @@ export default function MemeCard({ meme }) {
         user: 'anon',
         amount: Number(bid)
       });
-      console.log("Bid placed:", res.data);
+      // console.log("Bid placed:", res.data);
       setBid('');
     } catch (err) {
-      console.error("Bid failed:", err);
+      // console.error("Bid failed:", err);
     }
   };
 
