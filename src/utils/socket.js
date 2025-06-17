@@ -1,3 +1,4 @@
+
 import { io } from 'socket.io-client';
 
 const BASE_URL = process.env.REACT_APP_API_URL || 'https://memehustle-backend-8kap.onrender.com';
@@ -12,5 +13,5 @@ export const socket = io(BASE_URL, {
 });
 
 socket.on('connect_error', (err) => {
-  console.error('Socket connection failed:', err);
+  console.error('Socket connection failed:', err.message);
 });

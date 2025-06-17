@@ -1,28 +1,30 @@
+
 import React, { useState } from 'react';
 import axios from 'axios';
 import '../pages/MemeForm.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faImage, faCloudUploadAlt } from '@fortawesome/free-solid-svg-icons';
 
-// Define BASE_URL with a fallback to the backend URL
+// Define BASE_URL with a fallback
 const BASE_URL = process.env.REACT_APP_API_URL || 'https://memehustle-backend-8kap.onrender.com';
 
-console.log('API base URL:', BASE_URL); // Debug log
+console.log('MemeForm API base URL:', BASE_URL); // Debug log
 
 export default function MemeForm({ onNew }) {
   const [title, setTitle] = useState('');
   const [imageUrl, setImageUrl] = useState('');
   const [tags, setTags] = useState('');
-  const [error, setError] = useState(null); // Added for error feedback
+  const [error, setError] = useState(null);
 
   async function submit(e) {
     e.preventDefault();
-    setError(null); // Clear previous errors
+    setError(null);
+    console.log('Submitting to:', `${BASE_URL}/memes`); // Debug log
     try {
       const res = await axios.post(`${BASE_URL}/memes`, {
         title,
         imageUrl,
-        tags: tags.split(',').map(tag => tag.trim()).filter(tag => tag), // Filter out empty tags
+        tags: tags.split(',').map(tag => tag.trim()).filter(tag => tag),
       }, {
         headers: {
           'Content-Type': 'application/json',
@@ -31,15 +33,14 @@ export default function MemeForm({ onNew }) {
 
       console.log('Meme submission successful:', res.data);
 
-      // Clear form fields
       setTitle('');
       setImageUrl('');
       setTags('');
 
-      if (onNew) onNew(res.data); // Optional callback after success
+      if (onNew) onNew(res.data);
     } catch (err) {
-      console.error('Submission failed:', err);
-      setError('Failed to submit meme. Please check the URL or try again.'); // User feedback
+      console.error('Submission failed:', err.message);
+      setError('Failed to submit meme. Please try again.');
     }
   }
 
@@ -73,7 +74,7 @@ export default function MemeForm({ onNew }) {
           className="meme-input"
           required
         />
-        {error && <p className="error-message" style={{ color: 'red' }}>{error}</p>} {/* Display error */}
+        {error && <p className="error-message">{error}</p>}
         <button type="submit" className="meme-submit-button">
           <FontAwesomeIcon icon={faCloudUploadAlt} /> Upload Meme
         </button>

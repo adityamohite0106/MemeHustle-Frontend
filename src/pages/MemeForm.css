@@ -63,3 +63,9 @@
   outline: 2px solid #60a5fa;
   outline-offset: 2px;
 }
+.error-message {
+  color: red;
+  font-size: 0.9em;
+  margin-top: 0.5em;
+  text-align: center;
+}
