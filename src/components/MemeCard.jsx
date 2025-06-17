@@ -6,6 +6,8 @@ import { socket } from '../utils/socket';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faThumbsDown, faCoins } from '@fortawesome/free-solid-svg-icons';
 
+const BASE_URL = process.env.REACT_APP_API_URL;
+
 export default function MemeCard({ meme }) {
   const [voteCount, setVoteCount] = useState(meme.voteCount || 0);
   const [bid, setBid] = useState('');
@@ -25,7 +27,7 @@ export default function MemeCard({ meme }) {
 
   const castVote = async (type) => {
     try {
-      const res = await axios.post('http://localhost:3001/vote', {
+      const res = await axios.post(`${BASE_URL}/vote`, {
         memeId: meme._id,
         voteType: type,
         user: 'anon'
@@ -42,7 +44,7 @@ export default function MemeCard({ meme }) {
 
   const placeBid = async () => {
     try {
-      const res = await axios.post('http://localhost:3001/bids', {
+      const res = await axios.post(`${BASE_URL}/bids`, {
         memeId: meme._id,
         user: 'anon',
         amount: Number(bid)
@@ -56,47 +58,45 @@ export default function MemeCard({ meme }) {
 
   return (
     <div className="meme-card">
-  <img src={meme.imageUrl} alt={meme.title} className="meme-image" />
-  
+      <img src={meme.imageUrl} alt={meme.title} className="meme-image" />
 
-  <div className="meme-content">
-    <h2 className="meme-title">{meme.title}</h2>
-    <p className="meme-tags">
-      {(meme.tags || []).map(tag => (
-        <span key={tag}>#{tag}</span>
-      ))}
-    </p>
+      <div className="meme-content">
+        <h2 className="meme-title">{meme.title}</h2>
+        <p className="meme-tags">
+          {(meme.tags || []).map(tag => (
+            <span key={tag}>#{tag}</span>
+          ))}
+        </p>
 
-    {meme.caption && <div className="caption">🧠 <strong>Caption:</strong> {meme.caption}</div>}
-    {meme.vibe && <div className="vibe">🎵 <strong>Vibe:</strong> {meme.vibe}</div>}
+        {meme.caption && <div className="caption">🧠 <strong>Caption:</strong> {meme.caption}</div>}
+        {meme.vibe && <div className="vibe">🎵 <strong>Vibe:</strong> {meme.vibe}</div>}
 
-    <div className="vote-section">
-      <div className="vote-buttons">
-        <button onClick={() => castVote('upvote')}>
-          <FontAwesomeIcon icon={faHeart} size="lg" />
-        </button>
-        <button onClick={() => castVote('downvote')}>
-          <FontAwesomeIcon icon={faThumbsDown} size="lg" />
-        </button>
+        <div className="vote-section">
+          <div className="vote-buttons">
+            <button onClick={() => castVote('upvote')}>
+              <FontAwesomeIcon icon={faHeart} size="lg" />
+            </button>
+            <button onClick={() => castVote('downvote')}>
+              <FontAwesomeIcon icon={faThumbsDown} size="lg" />
+            </button>
+          </div>
+          <span className="vote-count">{voteCount} {voteCount === 1 ? 'vote' : 'votes'}</span>
+        </div>
+
+        <div className="bid-section">
+          <input
+            type="number"
+            value={bid}
+            onChange={(e) => setBid(e.target.value)}
+            placeholder="Place your bid"
+            className="bid-input"
+          />
+          <button onClick={placeBid} className="bid-button">
+            <FontAwesomeIcon icon={faCoins} />
+            <span>Bid</span>
+          </button>
+        </div>
       </div>
-      <span className="vote-count">{voteCount} {voteCount === 1 ? 'vote' : 'votes'}</span>
     </div>
-
-    <div className="bid-section">
-      <input
-        type="number"
-        value={bid}
-        onChange={(e) => setBid(e.target.value)}
-        placeholder="Place your bid"
-        className="bid-input"
-      />
-      <button onClick={placeBid} className="bid-button">
-        <FontAwesomeIcon icon={faCoins} />
-        <span>Bid</span>
-      </button>
-    </div>
-  </div>
-</div>
-
   );
 }
