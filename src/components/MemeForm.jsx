@@ -67,6 +67,7 @@ async function submit(e) {
           className="meme-input"
           type="url"
           required
+
           title="Please enter a valid image URL starting with http:// or https://"
         />
         <input
