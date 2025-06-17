@@ -12,6 +12,8 @@
  🌐 Frontend (Vercel): [https://memehustle.vercel.app](https://memehustle.vercel.app)
 - 🛠️ Backend (Render): [https://memehustle-backend-8kap.onrender.com](https://memehustle-backend-8kap.onrender.com)
 
+<img width="948" alt="image" src="https://github.com/user-attachments/assets/cd2fa488-bed7-47de-ad6a-470d9e29d25f" />
+<img width="949" alt="image" src="https://github.com/user-attachments/assets/90e4360c-3a6a-405e-927b-c47968e76d81" />
 
 ## 🛠 Tech Stack
 
