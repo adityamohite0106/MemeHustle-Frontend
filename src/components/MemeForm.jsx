@@ -16,33 +16,36 @@ export default function MemeForm({ onNew }) {
   const [tags, setTags] = useState('');
   const [error, setError] = useState(null);
 
-  async function submit(e) {
-    e.preventDefault();
-    setError(null);
-    console.log('Submitting to:', `${BASE_URL}/memes`); // Debug log
-    try {
-      const res = await axios.post(`${BASE_URL}/memes`, {
-        title,
-        imageUrl,
-        tags: tags.split(',').map(tag => tag.trim()).filter(tag => tag),
-      }, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+async function submit(e) {
+  e.preventDefault();
+  setError(null);
+  console.log('Submitting to:', `${BASE_URL}/memes`);
+  try {
+    const res = await axios.post(`${BASE_URL}/memes`, {
+      title,
+      imageUrl,
+      tags: tags.split(',').map(tag => tag.trim()).filter(tag => tag),
+    }, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
 
-      console.log('Meme submission successful:', res.data);
+    console.log('Meme submission successful:', res.data);
 
-      setTitle('');
-      setImageUrl('');
-      setTags('');
+    setTitle('');
+    setImageUrl('');
+    setTags('');
 
-      if (onNew) onNew(res.data);
-    } catch (err) {
-      console.error('Submission failed:', err.message);
-      setError('Failed to submit meme. Please try again.');
-    }
+    // ✅ Let socket.io handle the update; don't add meme manually
+    // if (onNew) onNew(res.data);
+
+  } catch (err) {
+    console.error('Submission failed:', err.message);
+    setError('Failed to submit meme. Please try again.');
   }
+}
+
 
   return (
     <div className="meme-form-container">
