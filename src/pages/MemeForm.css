@@ -1,0 +1,65 @@
+/* MemeForm.css */
+
+.meme-form-container {
+  width: 100%;
+  max-width: 400px;
+  margin: 24px auto;
+  padding: 24px;
+  background-color: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.meme-form-title {
+  text-align: center;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 16px;
+}
+
+.meme-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.meme-input {
+  padding: 10px 16px;
+  font-size: 0.875rem;
+  color: #374151;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  outline: none;
+}
+
+.meme-input:focus {
+  border-color: #60a5fa;
+  box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.4);
+}
+
+.meme-submit-button {
+  width: 100%;
+  padding: 10px 0;
+  background: linear-gradient(to right, #ec4899, #8b5cf6);
+  color: white;
+  font-weight: 500;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background 0.3s ease;
+}
+
+.meme-submit-button:hover {
+  background: linear-gradient(to right, #db2777, #7c3aed);
+}
+
+.meme-submit-button:focus {
+  outline: 2px solid #60a5fa;
+  outline-offset: 2px;
+}

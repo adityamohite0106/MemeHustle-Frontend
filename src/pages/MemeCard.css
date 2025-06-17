@@ -1,0 +1,123 @@
+/* MemeCard.css */
+
+.meme-card {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto 20px;
+  background-color: #ffffff;
+  color: white;
+  font-family: monospace;
+  border-radius: 10px;
+  box-shadow: 0 0 5px #4c4c4c;
+  /* border: 1px solid #333; */
+  overflow: hidden;
+}
+
+.meme-image {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+.meme-content {
+  background-color: #fffcfc;
+  padding: 16px;
+  /* border: 1px solid #333; */
+  border-radius: 6px;
+  color: white;
+}
+
+.meme-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #96c1c1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.meme-tags {
+  font-size: 0.75rem;
+  color: #c084fc;
+  margin: 4px 0 8px 0;
+}
+
+.meme-tags span {
+  margin-right: 8px;
+}
+
+.caption {
+  font-size: 0.875rem;
+  font-style: italic;
+  color: #f472b6;
+  margin-top: 8px;
+}
+
+.vibe {
+  font-size: 0.875rem;
+  color: #facc15;
+  margin-top: 4px;
+}
+
+.vote-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+}
+
+.vote-buttons button {
+  margin-right: 16px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.vote-buttons button:hover {
+  transform: scale(1.1);
+}
+
+.vote-count {
+  font-size: 0.875rem;
+  color: #9ca3af;
+}
+
+.bid-section {
+  display: flex;
+  align-items: center;
+  margin-top: 16px;
+  gap: 8px;
+}
+
+.bid-input {
+  flex: 1;
+  padding: 8px 12px;
+  font-size: 0.875rem;
+  border: 1px solid #4b5563;
+  border-radius: 6px;
+  background-color: #fffcfc;
+  color: rgb(4, 4, 4);
+}
+
+.bid-input::placeholder {
+  color: #6b7280;
+}
+
+.bid-button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(to right, #ec4899, #8b5cf6);
+  color: white;
+  padding: 8px 16px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.bid-button:hover {
+  background: linear-gradient(to right, #db2777, #7c3aed);
+}

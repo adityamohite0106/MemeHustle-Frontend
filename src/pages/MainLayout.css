@@ -1,0 +1,81 @@
+/* MainLayout.css */
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(-93deg, #ffffff, #f0f0f0, #e3f2fd, #fff7ea);
+  background-size: 400% 400%;
+  animation: softGradient 15s ease infinite;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  min-height: 100vh;
+}
+
+
+.main-wrapper {
+  padding: 32px;
+}
+
+.main-title {
+  font-size: 3rem;
+  color: #ff33cc; /* neon pink */
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 24px;
+  position: relative;
+  text-transform: uppercase;
+}
+   .top {
+        position: fixed;
+    bottom: 1px;
+    right: 10px;
+    text-decoration: none;
+  
+    font-size: 100px;
+   }
+   .top a{
+    text-decoration: none;
+    font-weight: bold;
+   }
+
+/* Optional glitch effect */
+.main-title.glitch::before,
+.main-title.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  color: #ff33cc;
+  clip: rect(0, 900px, 0, 0);
+  animation: glitch 2s infinite linear alternate-reverse;
+}
+
+@keyframes glitch {
+  0% {
+    clip: rect(42px, 9999px, 44px, 0);
+    transform: skew(0.3deg);
+  }
+  5% {
+    clip: rect(12px, 9999px, 80px, 0);
+    transform: skew(0.6deg);
+  }
+  10% {
+    clip: rect(85px, 9999px, 100px, 0);
+    transform: skew(0.3deg);
+  }
+  100% {
+    clip: rect(0, 9999px, 0, 0);
+  }
+}
+
+.meme-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  margin-top: 32px;
+}
+
+@media (min-width: 768px) {
+  .meme-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
